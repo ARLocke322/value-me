@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  asset_type: MyString
+  name: MyString
+  currency: MyString
+  country: MyString
+  sector: MyString
+
+two:
+  symbol: MyString
+  asset_type: MyString
+  name: MyString
+  currency: MyString
+  country: MyString
+  sector: MyString

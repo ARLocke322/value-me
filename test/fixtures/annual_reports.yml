@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  fiscal_date_ending: 2026-01-12
+  reported_currency: MyString
+  operating_cash_flow: 9.99
+  depreciation_depletion_and_amortization: 9.99
+  capital_expenditures: 9.99
+  change_in_inventory: 9.99
+
+two:
+  company: two
+  fiscal_date_ending: 2026-01-12
+  reported_currency: MyString
+  operating_cash_flow: 9.99
+  depreciation_depletion_and_amortization: 9.99
+  capital_expenditures: 9.99
+  change_in_inventory: 9.99
