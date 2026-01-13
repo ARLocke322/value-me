@@ -1,6 +1,6 @@
-class CreateAnnualReports < ActiveRecord::Migration[8.1]
+class CreateAcfReports < ActiveRecord::Migration[8.1]
   def change
-    create_table :annual_reports do |t|
+    create_table :acf_reports do |t|
       t.references :company, null: false, foreign_key: true
       t.date :fiscal_date_ending, null: false
       t.string :reported_currency, null: false
@@ -12,6 +12,6 @@ class CreateAnnualReports < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :annual_reports, [ :fiscal_date_ending, :company_id ], unique: true
+    add_index :acf_reports, [ :fiscal_date_ending, :company_id ], unique: true
   end
 end

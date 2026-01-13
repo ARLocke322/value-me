@@ -2,6 +2,25 @@ class CompanyAnalysisFlow < ApplicationRecord
   belongs_to :company, optional: true
 
   state_machine :state, initial: :pending do
+    # CALLBACKS
+    after_transition to: :fetching_overview do |flow|
+      FetchCompanyOverviewJob.perform_later(flow.id)
+    end
+
+    after_transition to: :saving_overview do |flow, transition|
+      options = transition.args.extract_options!
+      SaveCompanyOverviewJob.perform_later(flow.id, options[:response])
+    end
+
+    after_transition to: :fetching_cf do |flow|
+      FetchCompanyCfJob.perform_later(flow.id)
+    end
+
+    after_transition to: :saving_acf_reports do |flow, transition|
+      options = transition.args.extract_options!
+      SaveCompanyAcfReportsJob.perform_later(flow.id, options[:response])
+    end
+
     # EVENTS
     event :start_fetch_overview do
       transition pending: :fetching_overview
@@ -29,15 +48,30 @@ class CompanyAnalysisFlow < ApplicationRecord
       transition saving_overview: :failed_save_overview
     end
 
-    # CALLBACKS
-    after_transition from: :pending, to: :fetching_overview do |flow|
-      FetchCompanyOverviewJob.perform_later(flow.id)
+    event :start_fetch_cf do
+      transition saved_overview: :fetching_cf
+      transition failed_fetch_cf: :fetching_cf
     end
 
-    after_transition from: :fetched_overview, to: :saving_overview do |flow, transition|
-      # options = transition.args.last.is_a?(Hash) ? transition.args.pop : {}
-      options = transition.args.extract_options!
-      SaveCompanyOverviewJob.perform_later(flow.id, options[:response])
+    event :finish_fetch_cf do
+      transition fetching_cf: :fetched_cf
+    end
+
+    event :fail_fetch_cf do
+      transition fetching_cf: :failed_fetch_cf
+    end
+
+    event :start_save_acf_reports do
+      transition fetched_cf: :saving_acf_reports
+      transition failed_save_acf_reports: :saving_acf_reports
+    end
+
+    event :finish_save_acf_reports do
+      transition saving_acf_reports: :saved_acf_reports
+    end
+
+    event :fail_save_acf_reports do
+      transition saving_acf_reports: :failed_save_acf_reports
     end
   end
 end

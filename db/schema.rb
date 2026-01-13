@@ -14,7 +14,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_194314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "annual_reports", force: :cascade do |t|
+  create_table "acf_reports", force: :cascade do |t|
     t.decimal "capital_expenditures"
     t.decimal "change_in_inventory"
     t.bigint "company_id", null: false
@@ -24,8 +24,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_194314) do
     t.decimal "operating_cash_flow", null: false
     t.string "reported_currency", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_annual_reports_on_company_id"
-    t.index ["fiscal_date_ending", "company_id"], name: "index_annual_reports_on_fiscal_date_ending_and_company_id", unique: true
+    t.index ["company_id"], name: "index_acf_reports_on_company_id"
+    t.index ["fiscal_date_ending", "company_id"], name: "index_acf_reports_on_fiscal_date_ending_and_company_id", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -50,6 +50,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_194314) do
     t.index ["company_id"], name: "index_company_analysis_flows_on_company_id"
   end
 
-  add_foreign_key "annual_reports", "companies"
+  add_foreign_key "acf_reports", "companies"
   add_foreign_key "company_analysis_flows", "companies"
 end
