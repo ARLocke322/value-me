@@ -12,6 +12,6 @@ class CreateAnnualReports < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :annual_reports, [ :fiscal_date_ending, :company ], unique: true
+    add_index :annual_reports, [ :fiscal_date_ending, :company_id ], unique: true
   end
 end
