@@ -1,4 +1,5 @@
 class Company < ApplicationRecord
+  has_one :company_analysis_flow
   has_many :annual_reports
 
   validates :symbol, presence: true, uniqueness: true
