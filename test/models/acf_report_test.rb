@@ -1,6 +1,6 @@
 require "test_helper"
 
-class FetchInitialCompanyDataJobTest < ActiveJob::TestCase
+class AcfReportTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

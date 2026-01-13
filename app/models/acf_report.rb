@@ -1,4 +1,4 @@
-class AnnualReport < ApplicationRecord
+class AcfReport < ApplicationRecord
   belongs_to :company
 
   validates :fiscal_date_ending,
