@@ -1,4 +1,4 @@
-class FetchCompanyOverviewJob < ApplicationJob
+class FetchCompanyQuoteJob < ApplicationJob
   queue_as :default
 
   def perform(flow_id)
@@ -6,7 +6,7 @@ class FetchCompanyOverviewJob < ApplicationJob
 
     conn = Faraday.new(
       url: "https://www.alphavantage.co/query?" \
-        "function=OVERVIEW&" \
+        "function=GLOBAL_QUOTE&" \
         "symbol=#{flow.symbol}&" \
         "apikey=#{ENV["ALPHAVANTAGE_API_KEY"]}",
     ) do |builder|
@@ -18,10 +18,10 @@ class FetchCompanyOverviewJob < ApplicationJob
 
     response = conn.get()
 
-    flow.finish_fetch_overview!
-    flow.start_save_overview!(response: response.body)
+    flow.finish_fetch_quote!
+    flow.start_save_quote!(response: response.body)
   rescue => e
     flow.update(error_message: e.message)
-    flow.fail_fetch_overview!
+    flow.fail_fetch_quote!
   end
 end

@@ -1,0 +1,13 @@
+Value-Me
+
+API
+Fetch company information ✅
+Fetch company cash flow statement ✅
+Fetch statements endpoint ✅
+fix response passing in retries
+add quote endpoint call into flow
+extract api call logic to service function?
+
+CLIENT
+company search
+company page

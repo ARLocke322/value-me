@@ -38,11 +38,11 @@ class Api::V1::CompaniesController < ApplicationController
   private
     def format_acf_report(report)
       {
-          operating_cash_flow: report.operating_cash_flow,
-          depreciation_depletion_and_amortization: report.depreciation_depletion_and_amortization,
-          capital_expenditures: report.capital_expenditures,
-          change_in_inventory: report.change_in_inventory,
-          reported_currency: report.reported_currency
+        operating_cash_flow: report.operating_cash_flow,
+        depreciation_depletion_and_amortization: report.depreciation_depletion_and_amortization,
+        capital_expenditures: report.capital_expenditures,
+        change_in_inventory: report.change_in_inventory,
+        reported_currency: report.reported_currency
       }
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_12_194314) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,6 +50,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_194314) do
     t.index ["company_id"], name: "index_company_analysis_flows_on_company_id"
   end
 
+  create_table "quotes", force: :cascade do |t|
+    t.decimal "change"
+    t.decimal "change_percent"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.decimal "high"
+    t.date "latest_trading_date"
+    t.decimal "low"
+    t.decimal "open"
+    t.decimal "previous_close"
+    t.decimal "price"
+    t.datetime "updated_at", null: false
+    t.decimal "volume"
+    t.index ["company_id"], name: "index_quotes_on_company_id"
+  end
+
   add_foreign_key "acf_reports", "companies"
   add_foreign_key "company_analysis_flows", "companies"
+  add_foreign_key "quotes", "companies"
 end
