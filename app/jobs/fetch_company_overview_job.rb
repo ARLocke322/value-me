@@ -9,6 +9,7 @@ class FetchCompanyOverviewJob < ApplicationJob
 
   def perform(flow_id)
     flow = CompanyAnalysisFlow.find(flow_id)
+    flow.company ||= Company.create!(symbol: flow.symbol)
 
     conn = Faraday.new(
       url: "https://www.alphavantage.co/query?" \

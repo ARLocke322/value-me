@@ -32,8 +32,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
     t.string "asset_type"
     t.string "country"
     t.datetime "created_at", null: false
-    t.string "currency", null: false
-    t.string "name", null: false
+    t.string "currency"
+    t.string "name"
     t.string "sector"
     t.string "symbol", null: false
     t.datetime "updated_at", null: false
