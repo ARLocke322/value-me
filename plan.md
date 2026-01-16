@@ -7,10 +7,10 @@ API
 -[ ] fix response passing in retries
 -[x] add quote endpoint call into flow
 -[ ] extract api call logic to service function?
--[ ] refactor retry logic for all jobs
--[ ] change create flow and start cf fetch routes
+-[x] refactor retry logic for all jobs
+-[x] change create flow and start cf fetch routes
 -[ ] fix multiple flows when company not linked
--[ ] change create flow to symbol query param
+-[x] change create flow to symbol query param
 
 CLIENT
 company search

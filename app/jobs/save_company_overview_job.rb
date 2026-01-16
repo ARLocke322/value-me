@@ -5,7 +5,7 @@ class SaveCompanyOverviewJob < ApplicationJob
     CompanyAnalysisFlow.transaction do
       flow = CompanyAnalysisFlow.lock.find(flow_id)
 
-      company = Company.create!(
+      flow.company.update!(
         symbol: response["Symbol"],
         asset_type: response["AssetType"],
         country: response["Country"],
@@ -13,7 +13,6 @@ class SaveCompanyOverviewJob < ApplicationJob
         name: response["Name"],
         currency: response["Currency"]
       )
-      flow.update!(company: company)
 
       flow.finish_save_overview!
       flow.start_fetch_quote!
