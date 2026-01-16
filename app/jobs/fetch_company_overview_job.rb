@@ -1,5 +1,11 @@
 class FetchCompanyOverviewJob < ApplicationJob
   queue_as :default
+  retry_on StandardError,
+    wait: :polynomially_longer, attempts: 5 do |job, exception|
+      flow ||= CompanyAnalysisFlow.find(job.arguments.first)
+      flow.update(error_message: exception.message)
+      flow.fail_fetch_overview
+    end
 
   def perform(flow_id)
     flow = CompanyAnalysisFlow.find(flow_id)
@@ -18,10 +24,11 @@ class FetchCompanyOverviewJob < ApplicationJob
 
     response = conn.get()
 
+    unless response.body.present?
+      raise StandardError, "Invalid API respones: #{response.body}"
+    end
+
     flow.finish_fetch_overview!
     flow.start_save_overview!(response: response.body)
-  rescue => e
-    flow.update(error_message: e.message)
-    flow.fail_fetch_overview!
   end
 end

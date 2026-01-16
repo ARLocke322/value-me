@@ -15,13 +15,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "acf_reports", force: :cascade do |t|
-    t.decimal "capital_expenditures"
-    t.decimal "change_in_inventory"
+    t.decimal "capital_expenditures", precision: 15, scale: 2
+    t.decimal "change_in_inventory", precision: 15, scale: 2
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
-    t.decimal "depreciation_depletion_and_amortization"
+    t.decimal "depreciation_depletion_and_amortization", precision: 15, scale: 2
     t.date "fiscal_date_ending", null: false
-    t.decimal "operating_cash_flow", null: false
+    t.decimal "operating_cash_flow", precision: 15, scale: 2, null: false
     t.string "reported_currency", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_acf_reports_on_company_id"
@@ -51,19 +51,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
   end
 
   create_table "quotes", force: :cascade do |t|
-    t.decimal "change"
-    t.decimal "change_percent"
+    t.decimal "change", precision: 12, scale: 2
+    t.decimal "change_percent", precision: 8, scale: 4
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
-    t.decimal "high"
+    t.decimal "high", precision: 12, scale: 2
     t.date "latest_trading_date"
-    t.decimal "low"
-    t.decimal "open"
-    t.decimal "previous_close"
-    t.decimal "price"
+    t.decimal "low", precision: 12, scale: 2
+    t.decimal "open", precision: 12, scale: 2
+    t.decimal "previous_close", precision: 12, scale: 2
+    t.decimal "price", precision: 12, scale: 2
     t.datetime "updated_at", null: false
-    t.decimal "volume"
-    t.index ["company_id"], name: "index_quotes_on_company_id"
+    t.decimal "volume", precision: 15
+    t.index ["company_id"], name: "index_quotes_on_company_id", unique: true
   end
 
   add_foreign_key "acf_reports", "companies"

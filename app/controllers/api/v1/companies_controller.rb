@@ -35,6 +35,35 @@ class Api::V1::CompaniesController < ApplicationController
     }
   end
 
+  def quote
+    company = Company.find_by!(symbol: params[:symbol])
+    quote = company.quote
+    if quote.present?
+      render json: {
+        symbol: company.symbol,
+        quote: {
+          open: quote[:open],
+          high: quote[:high],
+          low: quote[:low],
+          volume: quote[:volume],
+          latest_trading_date: quote[:latest_trading_date],
+          previous_close: quote[:previous_close],
+          change: quote[:change],
+          change_percent: quote[:change_percent]
+        }
+      }
+    else
+      render json: {
+        message: "No quote found."
+      }, status: :ok
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: {
+      error: "Company not found", status: :not_found
+    }
+  end
+
+
   private
     def format_acf_report(report)
       {

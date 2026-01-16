@@ -1,7 +1,7 @@
 class CreateQuotes < ActiveRecord::Migration[8.1]
   def change
     create_table :quotes do |t|
-      t.references :company, null: false, foreign_key: true
+      t.references :company, null: false, foreign_key: true, index: { unique: true }
       t.decimal :open, precision: 12, scale: 2
       t.decimal :high, precision: 12, scale: 2
       t.decimal :low, precision: 12, scale: 2

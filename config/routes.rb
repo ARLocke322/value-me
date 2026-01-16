@@ -4,6 +4,10 @@ Rails.application.routes.draw do
       resources :companies, only: :index do
         collection do
           get :cash_flows
+          get :quote
+          post :fetch_company, to: "company_analysis_flows#create"
+          post :fetch_cash_flows, to: "company_analysis_flows#start_fetch_cf"
+          get :flow_status, to: "company_analysis_flows#index"
         end
       end
       resources :company_analysis_flows, only: [ :create, :index ] do

@@ -5,8 +5,12 @@ Fetch company information ✅
 Fetch company cash flow statement ✅
 Fetch statements endpoint ✅
 fix response passing in retries
-add quote endpoint call into flow
+add quote endpoint call into flow ✅
 extract api call logic to service function?
+refactor retry logic for all jobs
+change create flow and start cf fetch routes
+fix multiple flows when company not linked
+change create flow to symbol query param
 
 CLIENT
 company search
