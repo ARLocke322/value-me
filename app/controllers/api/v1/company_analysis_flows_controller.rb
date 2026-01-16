@@ -1,6 +1,6 @@
 class Api::V1::CompanyAnalysisFlowsController < ApplicationController
   def create
-    flow = CompanyAnalysisFlow.new(flow_params)
+    flow = CompanyAnalysisFlow.new(symbol: params[:symbol])
     if flow.save
       flow.start_fetch_overview!
       render json: format_flow(flow), status: :created
