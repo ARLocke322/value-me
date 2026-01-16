@@ -5,10 +5,7 @@ class SaveCompanyAcfReportsJob < ApplicationJob
     CompanyAnalysisFlow.transaction do
       flow = CompanyAnalysisFlow.lock.find(flow_id)
 
-      reports = response["annualReports"]
-      raise "Empty response" unless reports.is_a?(Array)
-
-      reports.each do |report|
+      response["annualReports"].each do |report|
         AcfReport.create!(
           company: flow.company,
           fiscal_date_ending: report["fiscalDateEnding"],

@@ -16,6 +16,7 @@ class SaveCompanyOverviewJob < ApplicationJob
       flow.update!(company: company)
 
       flow.finish_save_overview!
+      flow.start_fetch_quote!
     end
 
   rescue => e
