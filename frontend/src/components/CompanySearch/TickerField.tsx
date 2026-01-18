@@ -1,4 +1,4 @@
-import { Field, FieldDescription, FieldError } from "@/components/ui/field"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import type { TickerSchemaData } from "@/types/tickerSchema"
 import { Controller, type Control } from "react-hook-form"
@@ -11,11 +11,13 @@ const TickerField = (
     render={({ field, fieldState }) => {
       return (
         <Field data-invalid={fieldState.invalid}>
+
+          <FieldLabel>Company Ticker Symbol</FieldLabel>
           <Input
             {...field}
             id="form-ticker"
             aria-invalid={fieldState.invalid}
-            value={String(field.value)}
+            value={field.value}
             placeholder="E.G., AAPL"
           />
           {fieldState.invalid && (<FieldError errors={[fieldState.error]} />)}

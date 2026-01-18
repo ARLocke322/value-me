@@ -17,7 +17,7 @@ const TickerFormFooter = ({ tickerError }: TickerFormFooterProps) =>
   <CardFooter >
     <Field orientation="vertical">
       <Button className="w-full" type="submit" form="trade-form">
-        Submit
+        Search
       </Button>
       {tickerError && (
         <Alert variant="destructive" className="mb-4">
