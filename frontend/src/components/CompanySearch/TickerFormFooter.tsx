@@ -15,17 +15,16 @@ type TickerFormFooterProps = {
 
 const TickerFormFooter = ({ tickerError }: TickerFormFooterProps) =>
   <CardFooter >
-    <Field orientation="horizontal">
+    <Field orientation="vertical">
+      <Button className="w-full" type="submit" form="trade-form">
+        Submit
+      </Button>
       {tickerError && (
         <Alert variant="destructive" className="mb-4">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>{tickerError}</AlertDescription>
         </Alert>
       )}
-      <Button className="w-full" type="submit" form="trade-form">
-        Submit
-      </Button>
     </Field>
   </CardFooter>
-
 export default TickerFormFooter

@@ -6,13 +6,11 @@ import Layout from "./layout";
 
 export function App() {
   return (
-    <div>
-      <Layout>
-        <Switch>
-          <Route component={CompanySearch} />
-        </Switch>
-      </Layout>
-    </div>
+    <Layout>
+      <Switch>
+        <Route component={CompanySearch} />
+      </Switch>
+    </Layout>
   );
 }
 

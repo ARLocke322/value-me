@@ -1,20 +1,23 @@
-import { Button } from "@/components/ui/button"
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import TickerFormHeader from "./TickerFormHeader"
 import TickerFormFooter from "./TickerFormFooter"
+import TickerFormBody from "./TickerFormBody"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { createTickerSchema, type TickerSchemaData } from "@/types/tickerSchema"
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const TickerForm = () => {
+  const [tickerError, setTickerError] = useState<string | null>(null);
+
+  const form = useForm<TickerSchemaData>({
+    resolver: zodResolver(createTickerSchema()),
+    mode: "onSubmit"
+  })
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col gap-4">
       <TickerFormHeader />
-      <TickerFormFooter tickerError={null} />
+      <TickerFormBody form={form} onSubmit={() => console.log("submit")} />
+      <TickerFormFooter tickerError={tickerError} />
     </div>
   )
 }
