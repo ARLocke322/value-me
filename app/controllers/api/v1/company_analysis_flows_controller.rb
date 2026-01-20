@@ -16,6 +16,16 @@ class Api::V1::CompanyAnalysisFlowsController < ApplicationController
     render json: { error: "Flow not found" }, status: :not_found
   end
 
+  def start_fetch_quote
+    flow = CompanyAnalysisFlow.find_by!(symbol: params[:symbol])
+    flow.start_fetch_quote!
+    render json: format_flow(flow), status: :ok
+  rescue StateMachines::InvalidTransition
+    render json: { error: "Cannot fetch quote" }, status: :conflict
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Flow not found" }, status: :not_found
+  end
+
   def start_fetch_cf
     flow = CompanyAnalysisFlow.find_by!(symbol: params[:symbol])
     flow.start_fetch_cf!

@@ -12,6 +12,7 @@ API
 -[ ] fix multiple flows when company not linked
 -[x] change create flow to symbol query param
 -[ ] change start quote fetch to its own flow
+-[ ] merge type assertions
 
 CLIENT
 company search

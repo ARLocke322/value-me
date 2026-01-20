@@ -4,6 +4,12 @@ export interface FetchCompanyResponse {
   state: string
 }
 
+export interface FetchCompanyQuoteResponse {
+  id: number
+  symbol: string
+  state: string
+}
+
 export enum CompanyAnalysisState {
   Pending = "pending",
 

@@ -27,12 +27,12 @@ class Api::V1::CompaniesController < ApplicationController
     else
       render json: {
         message: "No cash flows found. Please trigger fetch cash flows."
-      }, status: :ok
+      }, status: :not_found
     end
   rescue ActiveRecord::RecordNotFound
     render json: {
-      error: "Company not found", status: :not_found
-    }
+      error: "Company not found"
+    }, status: :not_found
   end
 
   def quote
@@ -55,12 +55,12 @@ class Api::V1::CompaniesController < ApplicationController
     else
       render json: {
         message: "No quote found."
-      }, status: :ok
+      }, status: :not_found
     end
   rescue ActiveRecord::RecordNotFound
     render json: {
-      error: "Company not found", status: :not_found
-    }
+      error: "Company not found"
+    }, status: :not_found
   end
 
 
