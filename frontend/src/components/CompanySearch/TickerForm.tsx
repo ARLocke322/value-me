@@ -6,20 +6,22 @@ import { useForm } from "react-hook-form"
 import { createTickerSchema, type TickerSchemaData } from "@/types/tickerSchema"
 import { zodResolver } from "@hookform/resolvers/zod";
 import companiesService from "@/services/companies"
+import { useLocation } from "wouter"
 
 const TickerForm = () => {
   const [tickerError, setTickerError] = useState<string | null>(null);
+  const [_location, navigate] = useLocation();
 
   const onSubmit = async (data: TickerSchemaData) => {
     try {
-      setTickerError(null);
-      const flowStatus = await companiesService.getFlowStatus(data.ticker);
-      if (flowStatus.error) {
-        console.log("no flow")
-      } else {
-        console.log("flow")
-      }
-
+      // setTickerError(null);
+      // const flowStatus = await companiesService.getFlowStatus(data.ticker);
+      // if (flowStatus.error) {
+      // setTickerError(flowStatus.error);
+      //} else {
+      //}
+      const ticker = data.ticker
+      navigate(`/${ticker}`)
     } catch {
       console.log("Error")
     }
@@ -33,7 +35,7 @@ const TickerForm = () => {
   return (
     <div className="flex flex-col gap-4">
       <TickerFormHeader />
-      <TickerFormBody form={form} onSubmit={() => console.log("submit")} />
+      <TickerFormBody form={form} onSubmit={onSubmit} />
       <TickerFormFooter tickerError={tickerError} />
     </div>
   )
