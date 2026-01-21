@@ -1,5 +1,5 @@
 import type { ErrorResponse, FetchCompanyQuoteResponse, FetchCompanyResponse, GetCompanyQuoteResponse, GetCompanyResponse, GetFlowStatusResponse } from "@/types/api/companies"
-import { isErrorResponse, isFetchCompanyQuoteResponse, isFetchCompanyResponse, isGetCompanyQuoteResponse, isGetCompanyResponse } from "@/utils/assertions";
+import { isErrorResponse, isFlowResponse, isGetCompanyQuoteResponse, isGetCompanyResponse } from "@/utils/assertions";
 
 const baseUrl = "http://localhost:3000/api/v1"
 
@@ -24,7 +24,7 @@ const fetchCompany = async (ticker: string) => {
       throw new Error(data.error || "API returned an error");
     }
 
-    if (isFetchCompanyResponse(data)) {
+    if (isFlowResponse(data)) {
       return data;
     }
 
@@ -108,7 +108,7 @@ const fetchCompanyQuote = async (ticker: string) => {
       throw new Error(data.error || "API returned an error");
     }
 
-    if (isFetchCompanyQuoteResponse(data)) {
+    if (isFlowResponse(data)) {
       return data;
     }
 

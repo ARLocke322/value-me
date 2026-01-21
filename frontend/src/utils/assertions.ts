@@ -20,21 +20,7 @@ export const isMissingResponse = (response: unknown)
   );
 }
 
-export const isFetchCompanyResponse = (response: unknown)
-  : response is GetCompanyResponse => {
-  return (
-    typeof response == 'object' &&
-    response != null &&
-    'id' in response &&
-    typeof response.id == 'number' &&
-    'symbol' in response &&
-    typeof response.symbol == 'string' &&
-    'state' in response &&
-    typeof response.state == 'string'
-  );
-}
-
-export const isFetchCompanyQuoteResponse = (response: unknown)
+export const isFlowResponse = (response: unknown)
   : response is GetCompanyResponse => {
   return (
     typeof response == 'object' &&

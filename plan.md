@@ -11,8 +11,9 @@ API
 -[x] change create flow and start cf fetch routes
 -[ ] fix multiple flows when company not linked
 -[x] change create flow to symbol query param
--[ ] change start quote fetch to its own flow
--[ ] merge type assertions
+-[x] change start quote fetch to its own flow
+-[x] merge type assertions
+-[ ] make cf and quote flows parallel - maybe not
 
 CLIENT
 company search
