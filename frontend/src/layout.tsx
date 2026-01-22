@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="relative p-2 pl-10 w-full flex flex-col items-center justify-center min-h-screen">
       <House
-        className="fixed top-2 left-2 cursor-pointer"
+        className="fixed top-4 left-2 cursor-pointer"
         size={24}
         onClick={() => navigate("/")}
       />
