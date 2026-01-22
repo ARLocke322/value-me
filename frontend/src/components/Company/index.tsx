@@ -4,7 +4,6 @@ import { Card } from "../ui/card";
 import { useState } from "react";
 
 import CompanyOverviewCard from "./CompanyOverviewCard";
-import FlowStatusCard from "./FlowStatusCard";
 import CompanyQuoteCard from "./CompanyQuoteCard";
 
 const Company = () => {

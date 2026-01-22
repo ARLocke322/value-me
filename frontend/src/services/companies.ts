@@ -1,32 +1,26 @@
-import type { ErrorResponse, FetchCompanyQuoteResponse, FetchCompanyResponse, GetCompanyQuoteResponse, GetCompanyResponse, GetFlowStatusResponse } from "@/types/api/companies"
+import type { ErrorResponse, FlowResponse, GetCompanyQuoteResponse, GetCompanyResponse } from "@/types/api/companies"
 import { isErrorResponse, isFlowResponse, isGetCompanyQuoteResponse, isGetCompanyResponse } from "@/utils/assertions";
 
 const baseUrl = "http://localhost:3000/api/v1"
 
-const fetchCompany = async (ticker: string) => {
+const getData = async <dataType>(
+  ticker: string, resource: string,
+  isDataType: (response: unknown) => response is dataType
+) => {
   try {
     const res = await fetch(
-      `${baseUrl}/companies/fetch_company?symbol=${ticker}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      `${baseUrl}/companies${resource}?symbol=${ticker}`, {
+      method: "GET"
     });
-
-    const data: FetchCompanyResponse | ErrorResponse = await res.json();
-
 
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     }
 
-    if (isErrorResponse(data)) {
-      throw new Error(data.error || "API returned an error");
-    }
+    const data: dataType | ErrorResponse = await res.json();
 
-    if (isFlowResponse(data)) {
-      return data;
-    }
+    if (isErrorResponse(data)) throw new Error(data.error || "API returned an error");
+    if (isDataType(data)) return data;
 
     throw new Error("Invalid data received from server")
   } catch (err) {
@@ -35,121 +29,21 @@ const fetchCompany = async (ticker: string) => {
   }
 }
 
-const getFlowStatus = async (ticker: string) => {
-  try {
-    const res = await fetch(
-      `${baseUrl}/companies/flow_status?symbol=${ticker}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+const getFlowStatus = (ticker: string) =>
+  getData<FlowResponse>(ticker, "/flow_status", isFlowResponse)
 
-    const data: GetFlowStatusResponse | ErrorResponse = await res.json();
+const fetchCompany = (ticker: string) =>
+  getData<FlowResponse>(ticker, "/fetch_company", isFlowResponse)
 
-    if (isErrorResponse(data)) {
-      throw new Error(data.error || "API returned an error");
-    }
+const getCompany = (ticker: string) =>
+  getData<GetCompanyResponse>(ticker, "", isGetCompanyResponse)
 
-    return { symbol: data.symbol, state: data.state }
+const fetchCompanyQuote = (ticker: string) =>
+  getData<FlowResponse>(ticker, "/fetch_quote", isFlowResponse)
 
-    throw new Error("Invalid data received from server")
-  } catch {
-    throw new Error("Network or server error")
-  }
-}
+const getCompanyQuote = (ticker: string) =>
+  getData<GetCompanyQuoteResponse>(ticker, "/quote", isGetCompanyQuoteResponse)
 
-const getCompany = async (ticker: string) => {
-  try {
-    const res = await fetch(
-      `${baseUrl}/companies?symbol=${ticker}`, {
-      method: "GET",
-    });
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-    }
-
-    const data: GetCompanyResponse | ErrorResponse = await res.json();
-
-    if (isErrorResponse(data)) {
-      throw new Error(data.error || "API returned an error");
-    }
-
-    if (isGetCompanyResponse(data)) {
-      return data;
-    }
-
-    throw new Error("Invalid data received from server")
-  } catch (err) {
-    if (err instanceof Error) throw err;
-    throw new Error("Network or server error")
-  }
-}
-
-const fetchCompanyQuote = async (ticker: string) => {
-  try {
-    const res = await fetch(
-      `${baseUrl}/companies/fetch_quote?symbol=${ticker}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    const data: FetchCompanyQuoteResponse | ErrorResponse = await res.json();
-
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-    }
-
-    if (isErrorResponse(data)) {
-      throw new Error(data.error || "API returned an error");
-    }
-
-    if (isFlowResponse(data)) {
-      return data;
-    }
-
-    throw new Error("Invalid data received from server")
-  } catch (err) {
-    if (err instanceof Error) throw err;
-    throw new Error("Network or server error")
-  }
-}
-const getCompanyQuote = async (ticker: string) => {
-  try {
-    const res = await fetch(
-      `${baseUrl}/companies/quote?symbol=${ticker}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-    }
-
-    const data: GetCompanyQuoteResponse | ErrorResponse = await res.json();
-
-    if (isErrorResponse(data)) {
-      throw new Error(data.error || "API returned an error");
-    }
-
-    if (isGetCompanyQuoteResponse(data)) {
-      return data;
-    }
-
-    throw new Error("Invalid data received from server")
-  } catch (err) {
-    if (err instanceof Error) throw err;
-    throw new Error("Network or server error")
-  }
-}
-
-const getCompanyCashFlows = (ticker: string) => { }
 
 export default {
   fetchCompany,
@@ -157,5 +51,4 @@ export default {
   getCompany,
   fetchCompanyQuote,
   getCompanyQuote,
-  getCompanyCashFlows
 }
