@@ -16,6 +16,7 @@ API
 -[ ] fix number precision
 -[x] convert service functions to use single generic function
 -[ ] change acf reports to list rather than hash
+-[ ] logo fetch
 
 CLIENT
 -[x] company search
@@ -24,4 +25,4 @@ CLIENT
 -[x] company acf reports
 -[x] merge type assertions
 -[ ] merge hooks into generic?
--[ ] change acf card to pop up
+-[x] change acf card to pop up
