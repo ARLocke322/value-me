@@ -1,5 +1,5 @@
-import type { ErrorResponse, FlowResponse, GetCompanyQuoteResponse, GetCompanyResponse } from "@/types/api/companies"
-import { isErrorResponse, isFlowResponse, isGetCompanyQuoteResponse, isGetCompanyResponse } from "@/utils/assertions";
+import type { ErrorResponse, FlowResponse, GetCompanyAcfReportsResponse, GetCompanyQuoteResponse, GetCompanyResponse } from "@/types/api/companies"
+import { isErrorResponse, isFlowResponse, isGetCompanyAcfReportsResponse, isGetCompanyQuoteResponse, isGetCompanyResponse } from "@/utils/assertions";
 
 const baseUrl = "http://localhost:3000/api/v1"
 
@@ -30,19 +30,39 @@ const getData = async <dataType>(
 }
 
 const getFlowStatus = (ticker: string) =>
-  getData<FlowResponse>(ticker, "/flow_status", isFlowResponse)
+  getData<FlowResponse>(
+    ticker, "/flow_status", isFlowResponse
+  )
 
 const fetchCompany = (ticker: string) =>
-  getData<FlowResponse>(ticker, "/fetch_company", isFlowResponse)
+  getData<FlowResponse>(
+    ticker, "/fetch_company", isFlowResponse
+  )
 
 const getCompany = (ticker: string) =>
-  getData<GetCompanyResponse>(ticker, "", isGetCompanyResponse)
+  getData<GetCompanyResponse>(
+    ticker, "", isGetCompanyResponse
+  )
 
 const fetchCompanyQuote = (ticker: string) =>
-  getData<FlowResponse>(ticker, "/fetch_quote", isFlowResponse)
+  getData<FlowResponse>(
+    ticker, "/fetch_quote", isFlowResponse
+  )
 
 const getCompanyQuote = (ticker: string) =>
-  getData<GetCompanyQuoteResponse>(ticker, "/quote", isGetCompanyQuoteResponse)
+  getData<GetCompanyQuoteResponse>(
+    ticker, "/quote", isGetCompanyQuoteResponse
+  )
+
+const fetchCompanyAcfReports = (ticker: string) =>
+  getData<FlowResponse>(
+    ticker, "/cash_flows", isFlowResponse
+  )
+
+const getCompanyAcfReports = (ticker: string) =>
+  getData<GetCompanyAcfReportsResponse>(
+    ticker, "/cash_flows", isGetCompanyAcfReportsResponse
+  )
 
 
 export default {
@@ -51,4 +71,6 @@ export default {
   getCompany,
   fetchCompanyQuote,
   getCompanyQuote,
+  fetchCompanyAcfReports,
+  getCompanyAcfReports
 }

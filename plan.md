@@ -14,6 +14,8 @@ API
 -[x] change start quote fetch to its own flow
 -[x] merge type assertions
 -[ ] make cf and quote flows parallel - maybe not
+-[ ] fix number precision
+-[x] convert service functions to use single generic function
 
 CLIENT
 company search
