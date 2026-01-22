@@ -60,6 +60,19 @@ export interface GetCompanyQuoteResponse {
   quote: Quote
 }
 
+export interface AcfReport {
+  operating_cash_flow: number
+  depreciation_depletion_and_amortization: number
+  capital_expenditures: number
+  change_in_inventory: number
+  reported_currency: string
+}
+
+export interface GetCompanyAcfReportsResponse {
+  symbol: string
+  acf_reports: Record<number, AcfReport>
+}
+
 export type ErrorResponse = {
   error: string
 }
@@ -67,3 +80,5 @@ export type ErrorResponse = {
 export type MissingResponse = {
   message: string
 }
+
+
