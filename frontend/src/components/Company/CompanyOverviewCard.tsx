@@ -13,26 +13,37 @@ const CompanyOverviewCard = ({ ticker }: { ticker: string }) => {
 
   const cardContent = () => {
     if (error && error.message !== "HTTP 404: Not Found") return (
-      <CardContent>
-        <Alert variant="destructive" className="mb-4">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error.message}</AlertDescription>
-        </Alert>
-      </CardContent>
+      <Alert variant="destructive" className="mb-4">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>{error.message}</AlertDescription>
+      </Alert>
     )
     if (loading) return (
-      <CardContent>
-        <Skeleton className="h-6 w-48" />
-      </CardContent>
+      <Skeleton className="h-6 w-48" />
     )
     if (overview) return (
-      <CardContent className="text-left">
-        <p className="font-medium">Name: {overview.name}</p>
-        <p className="font-medium">Sector: {overview.sector}</p>
-        <p className="font-medium">Country: {overview.country}</p>
-        <p className="font-medium">Currency: {overview.currency}</p>
-        <p className="font-medium">Asset Type: {overview.asset_type}</p>
-      </CardContent>
+      <div className="space-y-3 text-sm">
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Name:</span>
+          <span className="font-semibold">{overview.name}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Sector:</span>
+          <span className="font-semibold">{overview.sector}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Country:</span>
+          <span className="font-semibold">{overview.country}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Currency:</span>
+          <span className="font-semibold">{overview.currency}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">Asset Type:</span>
+          <span className="font-semibold">{overview.asset_type}</span>
+        </div>
+      </div>
     )
     return null
   }
@@ -45,15 +56,17 @@ const CompanyOverviewCard = ({ ticker }: { ticker: string }) => {
   }
 
   return (
-    <Card>
+    <Card className="min-w-80 ">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex justify-center items-center gap-2">
           <Building2 className="h-5 w-5" />
           Overview
           {cardButton()}
         </CardTitle>
       </CardHeader>
-      {cardContent()}
+      <CardContent>
+        {cardContent()}
+      </CardContent>
     </Card>
   )
 }

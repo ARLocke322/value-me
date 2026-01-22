@@ -21,6 +21,7 @@ CLIENT
 -[x] company search
 -[x] company overview
 -[x] company quote
--[ ] company acf reports
+-[x] company acf reports
 -[x] merge type assertions
 -[ ] merge hooks into generic?
+-[ ] change acf card to pop up

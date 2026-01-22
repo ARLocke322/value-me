@@ -12,19 +12,22 @@ import {
 const AcfTableRow = ({ date, acfReport }: { date: string, acfReport: AcfReport }) => (
   <TableRow>
     <TableCell className="font-medium">{date}</TableCell>
-    <TableCell>{acfReport.operating_cash_flow}</TableCell>
-    <TableCell>{acfReport.depreciation_depletion_and_amortization}</TableCell>
-    <TableCell>{acfReport.capital_expenditures}</TableCell>
-    <TableCell className="text-right">{acfReport.change_in_inventory}</TableCell>
+    <TableCell>{Number(acfReport.operating_cash_flow).toLocaleString()}</TableCell>
+    <TableCell>{Number(acfReport.depreciation_depletion_and_amortization).toLocaleString()}</TableCell>
+    <TableCell>{Number(acfReport.capital_expenditures).toLocaleString()}</TableCell>
+    <TableCell className="text-right">{Number(acfReport.change_in_inventory).toLocaleString()}</TableCell>
   </TableRow>
 )
 
 const AcfTable = ({ acfReports }: { acfReports: Record<number, AcfReport> }) => {
   return (
     <Table>
+      <TableCaption>
+        All numbers are in {acfReports["2024"]?.reported_currency}
+      </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-25">Year</TableHead>
+          <TableHead className="text-center w-25">Year</TableHead>
           <TableHead>Operating cash flow</TableHead>
           <TableHead>Depreciation depletion + amortization</TableHead>
           <TableHead>Capital expenditures</TableHead>
@@ -33,7 +36,7 @@ const AcfTable = ({ acfReports }: { acfReports: Record<number, AcfReport> }) => 
       </TableHeader>
       <TableBody>
         {Object.entries(acfReports).map(([key, value]) =>
-          <AcfTableRow date={key} acfReport={value} />
+          <AcfTableRow key={key} date={key} acfReport={value} />
         )}
       </TableBody>
     </Table>

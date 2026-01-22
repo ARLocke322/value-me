@@ -12,28 +12,45 @@ const CompanyQuoteCard = ({ ticker }: { ticker: string }) => {
 
   const cardContent = () => {
     if (error && error.message !== "HTTP 404: Not Found") return (
-      <CardContent>
-        <Alert variant="destructive" className="mb-4">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error.message}</AlertDescription>
-        </Alert>
-      </CardContent>
+      <Alert variant="destructive" className="mb-4">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>{error.message}</AlertDescription>
+      </Alert>
     )
     if (loading) return (
-      <CardContent>
-        <Skeleton className="h-6 w-48" />
-      </CardContent>
+      <Skeleton className="h-6 w-48" />
     )
     if (quote) return (
-      <CardContent className="text-left">
-        <p className="font-medium">Open: {quote.open}</p>
-        <p className="font-medium">Low: {quote.low}</p>
-        <p className="font-medium">Volume: {quote.volume}</p>
-        <p className="font-medium">Latest Trading Date: {quote.latest_trading_date.toString()}</p>
-        <p className="font-medium">Previous Close: {quote.previous_close}</p>
-        <p className="font-medium">Change: {quote.change}</p>
-        <p className="font-medium">Change (percent): {quote.change_percent}</p>
-      </CardContent>
+      <div className="space-y-3 text-sm">
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Open:</span>
+          <span className="font-semibold">${Number(quote.open).toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Low:</span>
+          <span className="font-semibold">${Number(quote.low).toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Volume:</span>
+          <span className="font-semibold">${Number(quote.volume).toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Latest Trading Date:</span>
+          <span className="font-semibold">{quote.latest_trading_date.toString()}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Previous Close:</span>
+          <span className="font-semibold">${Number(quote.previous_close).toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between border-b pb-2">
+          <span className="text-muted-foreground">Change:</span>
+          <span className="font-semibold">${Number(quote.change).toLocaleString()}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-muted-foreground">Change (percent):</span>
+          <span className="font-semibold">{quote.change_percent}%</span>
+        </div>
+      </div>
     )
     return null
   }
@@ -46,16 +63,18 @@ const CompanyQuoteCard = ({ ticker }: { ticker: string }) => {
   }
 
   return (
-    <Card>
+    <Card className="min-w-80 ">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex justify-center items-center gap-2">
           <ChartCandlestick className="h-5 w-5" />
           Company quote
           {cardButton()}
 
         </CardTitle>
       </CardHeader>
-      {cardContent()}
+      <CardContent>
+        {cardContent()}
+      </CardContent>
     </Card>
   )
 }
