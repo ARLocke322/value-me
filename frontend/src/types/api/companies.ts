@@ -1,10 +1,5 @@
-export interface FetchCompanyResponse {
-  id: number
-  symbol: string
-  state: string
-}
 
-export interface FetchCompanyQuoteResponse {
+export interface FlowResponse {
   id: number
   symbol: string
   state: string
@@ -39,12 +34,6 @@ export enum CompanyAnalysisState {
   SavingAcfReports = "saving_acf_reports",
   SavedAcfReports = "saved_acf_reports",
   FailedSaveAcfReports = "failed_save_acf_reports",
-}
-
-export interface GetFlowStatusResponse {
-  id: number
-  symbol: string
-  state: CompanyAnalysisState
 }
 
 export interface GetCompanyResponse {

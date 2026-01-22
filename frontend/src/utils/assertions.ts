@@ -1,4 +1,4 @@
-import type { ErrorResponse, GetCompanyQuoteResponse, GetCompanyResponse, MissingResponse, Quote } from "@/types/api/companies";
+import type { ErrorResponse, FlowResponse, GetCompanyQuoteResponse, GetCompanyResponse, MissingResponse, Quote } from "@/types/api/companies";
 
 export const isErrorResponse = (response: unknown):
   response is ErrorResponse => {
@@ -21,7 +21,7 @@ export const isMissingResponse = (response: unknown)
 }
 
 export const isFlowResponse = (response: unknown)
-  : response is GetCompanyResponse => {
+  : response is FlowResponse => {
   return (
     typeof response == 'object' &&
     response != null &&
