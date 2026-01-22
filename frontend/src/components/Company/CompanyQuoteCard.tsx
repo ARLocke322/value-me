@@ -1,6 +1,6 @@
 import { Button } from "../ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { AlertCircle, CircleDollarSign } from "lucide-react"
+import { AlertCircle, ChartCandlestick } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -49,7 +49,7 @@ const CompanyQuoteCard = ({ ticker }: { ticker: string }) => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <CircleDollarSign className="h-5 w-5" />
+          <ChartCandlestick className="h-5 w-5" />
           Company quote
           {cardButton()}
 
