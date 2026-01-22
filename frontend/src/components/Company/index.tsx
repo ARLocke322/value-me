@@ -12,15 +12,13 @@ const Company = () => {
   const [companyTicker, _setCompanyTicker] = useState<string>(location.slice(1))
 
   return (
-    <Card className="w-full min-h-screen text-center p-2">
-      <h1 className="text-2xl font-bold uppercase bg-gray-100 text-black px-4 py-2 inline-block rounded-md">
+    <Card className="bg-gray-200 w-full min-h-screen text-center p-2">
+      <h1 className="text-2xl font-bold uppercase bg-white text-black px-4 py-2 inline-block rounded-md">
         {companyTicker}
       </h1>
       <div className="flex flex-row gap-2 justify-center">
         <CompanyOverviewCard ticker={companyTicker} />
         <CompanyQuoteCard ticker={companyTicker} />
-      </div>
-      <div className="flex flex-row gap-2 justify-center">
         <CompanyAcfReportsCard ticker={companyTicker} />
       </div>
     </Card>
