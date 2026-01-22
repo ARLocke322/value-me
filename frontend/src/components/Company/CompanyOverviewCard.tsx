@@ -49,9 +49,8 @@ const CompanyOverviewCard = ({ ticker }: { ticker: string }) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Building2 className="h-5 w-5" />
-          Company Overview
+          Overview
           {cardButton()}
-
         </CardTitle>
       </CardHeader>
       {cardContent()}

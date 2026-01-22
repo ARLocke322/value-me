@@ -4,13 +4,13 @@ import { isErrorResponse, isFlowResponse, isGetCompanyAcfReportsResponse, isGetC
 const baseUrl = "http://localhost:3000/api/v1"
 
 const getData = async <dataType>(
-  ticker: string, resource: string,
+  ticker: string, resource: string, method: string,
   isDataType: (response: unknown) => response is dataType
 ) => {
   try {
     const res = await fetch(
       `${baseUrl}/companies${resource}?symbol=${ticker}`, {
-      method: "GET"
+      method: `${method}`
     });
 
     if (!res.ok) {
@@ -31,37 +31,37 @@ const getData = async <dataType>(
 
 const getFlowStatus = (ticker: string) =>
   getData<FlowResponse>(
-    ticker, "/flow_status", isFlowResponse
+    ticker, "/flow_status", "GET", isFlowResponse
   )
 
 const fetchCompany = (ticker: string) =>
   getData<FlowResponse>(
-    ticker, "/fetch_company", isFlowResponse
+    ticker, "/fetch_company", "POST", isFlowResponse
   )
 
 const getCompany = (ticker: string) =>
   getData<GetCompanyResponse>(
-    ticker, "", isGetCompanyResponse
+    ticker, "", "GET", isGetCompanyResponse
   )
 
 const fetchCompanyQuote = (ticker: string) =>
   getData<FlowResponse>(
-    ticker, "/fetch_quote", isFlowResponse
+    ticker, "/fetch_quote", "POST", isFlowResponse
   )
 
 const getCompanyQuote = (ticker: string) =>
   getData<GetCompanyQuoteResponse>(
-    ticker, "/quote", isGetCompanyQuoteResponse
+    ticker, "/quote", "GET", isGetCompanyQuoteResponse
   )
 
 const fetchCompanyAcfReports = (ticker: string) =>
   getData<FlowResponse>(
-    ticker, "/cash_flows", isFlowResponse
+    ticker, "/fetch_cash_flows", "POST", isFlowResponse
   )
 
 const getCompanyAcfReports = (ticker: string) =>
   getData<GetCompanyAcfReportsResponse>(
-    ticker, "/cash_flows", isGetCompanyAcfReportsResponse
+    ticker, "/cash_flows", "GET", isGetCompanyAcfReportsResponse
   )
 
 

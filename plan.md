@@ -9,14 +9,18 @@ API
 -[ ] extract api call logic to service function?
 -[x] refactor retry logic for all jobs
 -[x] change create flow and start cf fetch routes
--[ ] fix multiple flows when company not linked
+-[x] fix multiple flows when company not linked
 -[x] change create flow to symbol query param
 -[x] change start quote fetch to its own flow
--[x] merge type assertions
 -[ ] make cf and quote flows parallel - maybe not
 -[ ] fix number precision
 -[x] convert service functions to use single generic function
+-[ ] change acf reports to list rather than hash
 
 CLIENT
-company search
-company page
+-[x] company search
+-[x] company overview
+-[x] company quote
+-[ ] company acf reports
+-[x] merge type assertions
+-[ ] merge hooks into generic?
