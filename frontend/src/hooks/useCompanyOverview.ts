@@ -14,7 +14,7 @@ const useCompanyOverview = (ticker: string) => {
     setLoading(true);
 
     companiesService.fetchCompany(ticker)
-      .then(() => new Promise(resolve => setTimeout(resolve, 5000)))
+      .then(() => new Promise(resolve => setTimeout(resolve, 3500)))
       .then(() => companiesService.getCompany(ticker))
       .then(setOverview)
       .catch(setError)
