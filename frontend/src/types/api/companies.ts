@@ -1,9 +1,4 @@
-
-export interface FlowResponse {
-  id: number
-  symbol: string
-  state: string
-}
+import * as z from "zod";
 
 export enum CompanyAnalysisState {
   Pending = "pending",
@@ -36,49 +31,58 @@ export enum CompanyAnalysisState {
   FailedSaveAcfReports = "failed_save_acf_reports",
 }
 
-export interface GetCompanyResponse {
-  symbol: string
-  name: string
-  country: string
-  currency: string
-  sector: string
-  asset_type: string
-}
+export const FlowResponseSchema = z.object({
+  id: z.coerce.number(),
+  symbol: z.string(),
+  state: z.string()
+});
 
-export interface Quote {
-  open: number
-  high: number
-  low: number
-  volume: number
-  latest_trading_date: Date
-  previous_close: number
-  change: number
-  change_percent: number
-}
-export interface GetCompanyQuoteResponse {
-  symbol: string
-  quote: Quote
-}
 
-export interface AcfReport {
-  operating_cash_flow: number
-  depreciation_depletion_and_amortization: number
-  capital_expenditures: number
-  change_in_inventory: number
-  reported_currency: string
-}
+export const GetCompanyResponseSchema = z.object({
+  symbol: z.string(),
+  name: z.string(),
+  country: z.string(),
+  currency: z.string(),
+  sector: z.string(),
+  asset_type: z.string(),
+});
 
-export interface GetCompanyAcfReportsResponse {
-  symbol: string
-  acf_reports: Record<number, AcfReport>
-}
+export const GetCompanyQuoteResponseSchema = z.object({
+  symbol: z.string(),
+  quote: z.object({
+    high: z.coerce.number(),
+    open: z.coerce.number(),
+    low: z.coerce.number(),
+    volume: z.coerce.number(),
+    latest_trading_date: z.string().date(),
+    previous_close: z.coerce.number(),
+    change: z.coerce.number(),
+    change_percent: z.coerce.number(),
+  }),
+});
 
-export type ErrorResponse = {
-  error: string
-}
+export const GetCompanyAcfReportsResponseSchema = z.object({
+  symbol: z.string(),
+  acf_reports: z.record(
+    z.string(),
+    z.object({
+      operating_cash_flow: z.coerce.number(),
+      depreciation_depletion_and_amortization: z.coerce.number(),
+      capital_expenditures: z.coerce.number(),
+      change_in_inventory: z.coerce.number(),
+      reported_currency: z.string(),
+    }),
+  )
+});
 
-export type MissingResponse = {
-  message: string
-}
+export type FlowResponse = z.infer<typeof FlowResponseSchema>;
+
+export type GetCompanyResponse = z.infer<typeof GetCompanyResponseSchema>;
+
+export type GetCompanyQuoteResponse = z.infer<typeof GetCompanyQuoteResponseSchema>;
+export type Quote = GetCompanyQuoteResponse['quote'];
+
+export type GetCompanyAcfReportsResponse = z.infer<typeof GetCompanyAcfReportsResponseSchema>;
+export type AcfReport = GetCompanyAcfReportsResponse['acf_reports'][string];
 
 

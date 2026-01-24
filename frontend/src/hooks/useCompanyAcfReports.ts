@@ -15,7 +15,7 @@ const useCompanyAcfReports = (ticker: string) => {
     setLoading(true);
 
     companiesService.fetchCompanyAcfReports(ticker)
-      .then(() => new Promise(resolve => setTimeout(resolve, 5000)))
+      .then(() => new Promise(resolve => setTimeout(resolve, 3500)))
       .then(() => companiesService.getCompanyAcfReports(ticker))
       .then((res) => setAcfReports(res.acf_reports))
       .catch(setError)

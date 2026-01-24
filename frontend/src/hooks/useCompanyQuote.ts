@@ -14,7 +14,7 @@ const useCompanyQuote = (ticker: string) => {
     setLoading(true);
 
     companiesService.fetchCompanyQuote(ticker)
-      .then(() => new Promise(resolve => setTimeout(resolve, 5000)))
+      .then(() => new Promise(resolve => setTimeout(resolve, 300)))
       .then(() => companiesService.getCompanyQuote(ticker))
       .then((res) => setQuote(res.quote))
       .catch(setError)
