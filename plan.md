@@ -16,7 +16,8 @@ API
 -[ ] fix number precision
 -[x] convert service functions to use single generic function
 -[ ] change acf reports to list rather than hash
--[ ] logo fetch
+-[x] logo fetch
+-[ ] convert all fetch alphavantage jobs to one job!!!
 
 CLIENT
 -[x] company search
