@@ -9,7 +9,7 @@ class FetchAlphavantageJob < ApplicationJob
 
   def perform(flow_id, resource)
     client ||= AlphavantageClient.new
-    flow = CompanyAnalysisFlow.find(flow_id)
+    flow ||= CompanyAnalysisFlow.find(flow_id)
     data = client.fetch(resource, flow.symbol)
 
     flow.finish_alphavantage_fetch!

@@ -18,6 +18,7 @@ API
 -[ ] change acf reports to list rather than hash
 -[x] logo fetch
 -[ ] convert all fetch alphavantage jobs to one job!!!
+-[ ] move api repsonse conversions to model
 
 CLIENT
 -[x] company search
