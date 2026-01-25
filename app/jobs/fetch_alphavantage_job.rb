@@ -8,27 +8,11 @@ class FetchAlphavantageJob < ApplicationJob
     end
 
   def perform(flow_id, resource)
+    client ||= AlphavantageClient.new
     flow = CompanyAnalysisFlow.find(flow_id)
-
-    conn = Faraday.new(
-      url: "https://www.alphavantage.co/query?" \
-        "function=#{resource}&" \
-        "symbol=#{flow.symbol}&" \
-        "apikey=#{ENV["ALPHAVANTAGE_API_KEY"]}",
-    ) do |builder|
-      builder.request :json
-
-      builder.response :json
-      builder.response :raise_error
-    end
-
-    response = conn.get()
-
-    unless parse_alphavantage_response(resource, response)
-      raise StandardError, "Invalid API respones: #{response.body}"
-    end
+    data = client.fetch(resource, flow.symbol)
 
     flow.finish_alphavantage_fetch!
-    flow.start_alphavantage_save!(response: response.body)
+    flow.start_alphavantage_save!(response: data)
   end
 end
