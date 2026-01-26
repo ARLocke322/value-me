@@ -23,7 +23,7 @@ gem "solid_cable"
 gem "faraday"
 
 gem "state_machines-activerecord"
-
+gem "active_model_serializers"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

@@ -12,6 +12,7 @@ class FetchAlphavantageJob < ApplicationJob
     flow ||= AlphavantageFlow.find(flow_id)
     flow.company ||= Company.create!(symbol: flow.symbol)
     data = client.fetch(resource, flow.symbol)
+    pp data
 
     flow.finish_fetch!
     flow.start_save!(response: data, resource: resource)

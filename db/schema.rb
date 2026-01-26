@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_26_092123) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_26_152150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -50,14 +50,38 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_092123) do
     t.index ["symbol"], name: "index_companies_on_symbol", unique: true
   end
 
-  create_table "company_analysis_flows", force: :cascade do |t|
-    t.bigint "company_id"
+  create_table "income_statements", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.decimal "comprehensive_income_net_of_tax", precision: 15, scale: 2
+    t.decimal "cost_of_goods_and_services_sold", precision: 15, scale: 2
+    t.decimal "cost_of_revenue", precision: 15, scale: 2
     t.datetime "created_at", null: false
-    t.string "error_message"
-    t.string "state", default: "pending"
-    t.string "symbol", null: false
+    t.decimal "depreciation", precision: 15, scale: 2
+    t.decimal "depreciation_and_amortization", precision: 15, scale: 2
+    t.decimal "ebit", precision: 15, scale: 2
+    t.decimal "ebitda", precision: 15, scale: 2
+    t.date "fiscal_date_ending", null: false
+    t.decimal "gross_profit", precision: 15, scale: 2, null: false
+    t.decimal "income_before_tax", precision: 15, scale: 2
+    t.decimal "income_tax_expense", precision: 15, scale: 2
+    t.decimal "interest_and_debt_expense", precision: 15, scale: 2
+    t.decimal "interest_expense", precision: 15, scale: 2
+    t.decimal "interest_income", precision: 15, scale: 2
+    t.decimal "investment_income_net", precision: 15, scale: 2
+    t.decimal "net_income", precision: 15, scale: 2
+    t.decimal "net_income_from_continuing_operations", precision: 15, scale: 2
+    t.decimal "net_interest_income", precision: 15, scale: 2
+    t.decimal "non_interest_income", precision: 15, scale: 2
+    t.decimal "operating_expenses", precision: 15, scale: 2
+    t.decimal "operating_income", precision: 15, scale: 2
+    t.decimal "other_non_operating_income", precision: 15, scale: 2
+    t.string "reported_currency", null: false
+    t.decimal "research_and_development", precision: 15, scale: 2
+    t.decimal "selling_general_and_administrative", precision: 15, scale: 2
+    t.decimal "total_revenue", precision: 15, scale: 2, null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_company_analysis_flows_on_company_id"
+    t.index ["company_id"], name: "index_income_statements_on_company_id"
+    t.index ["fiscal_date_ending", "company_id"], name: "index_income_statements_on_fiscal_date_ending_and_company_id", unique: true
   end
 
   create_table "quotes", force: :cascade do |t|
@@ -78,6 +102,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_092123) do
 
   add_foreign_key "acf_reports", "companies"
   add_foreign_key "alphavantage_flows", "companies"
-  add_foreign_key "company_analysis_flows", "companies"
+  add_foreign_key "income_statements", "companies"
   add_foreign_key "quotes", "companies"
 end
