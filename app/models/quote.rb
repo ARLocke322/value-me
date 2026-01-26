@@ -14,6 +14,7 @@ class Quote < ApplicationRecord
     record = find_or_initialize_by(company_id: company_id)
     record.assign_attributes(
       company_id: company_id,
+      open: response["Global Quote"]["02. open"],
       high: response["Global Quote"]["03. high"],
       low: response["Global Quote"]["04. low"],
       price: response["Global Quote"]["05. price"],

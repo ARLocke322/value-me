@@ -1,6 +1,6 @@
-class CreateCompanyAnalysisFlows < ActiveRecord::Migration[8.1]
+class AlphavantageFlow < ActiveRecord::Migration[8.1]
   def change
-    create_table :company_analysis_flows do |t|
+    create_table :alphavantage_flows do |t|
       t.string :state, default: "pending"
       t.string :error_message
       t.references :company, foreign_key: true
