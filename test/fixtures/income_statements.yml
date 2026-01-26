@@ -1,0 +1,59 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  fiscal_date_ending: 2026-01-26
+  reported_currency: MyString
+  gross_profit: 9.99
+  total_revenue: 9.99
+  cost_of_revenue: 9.99
+  cost_of_goods_and_services_sold: 9.99
+  operating_income: 9.99
+  selling_general_and_administrative: 9.99
+  research_and_development: 9.99
+  operating_expenses: 9.99
+  investment_income_net: 9.99
+  net_interest_income: 9.99
+  interest_income: 9.99
+  interest_expense: 9.99
+  non_interest_income: 9.99
+  other_non_operating_income: 9.99
+  depreciation: 9.99
+  depreciation_and_amortization: 9.99
+  income_before_tax: 9.99
+  income_tax_expense: 9.99
+  interest_and_debt_expense: 9.99
+  net_income_from_continuing_operations: 9.99
+  comprehensive_income_net_of_tax: 9.99
+  ebit: 9.99
+  ebitda: 9.99
+  net_income: 9.99
+
+two:
+  company: two
+  fiscal_date_ending: 2026-01-26
+  reported_currency: MyString
+  gross_profit: 9.99
+  total_revenue: 9.99
+  cost_of_revenue: 9.99
+  cost_of_goods_and_services_sold: 9.99
+  operating_income: 9.99
+  selling_general_and_administrative: 9.99
+  research_and_development: 9.99
+  operating_expenses: 9.99
+  investment_income_net: 9.99
+  net_interest_income: 9.99
+  interest_income: 9.99
+  interest_expense: 9.99
+  non_interest_income: 9.99
+  other_non_operating_income: 9.99
+  depreciation: 9.99
+  depreciation_and_amortization: 9.99
+  income_before_tax: 9.99
+  income_tax_expense: 9.99
+  interest_and_debt_expense: 9.99
+  net_income_from_continuing_operations: 9.99
+  comprehensive_income_net_of_tax: 9.99
+  ebit: 9.99
+  ebitda: 9.99
+  net_income: 9.99

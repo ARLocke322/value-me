@@ -1,11 +1,11 @@
-
 class SaveAlphavantageJob < ApplicationJob
   queue_as :default
 
   ALLOWED_MODELS = {
-    "GLOBAL_QUOTE"     => Quote,
-    "OVERVIEW"   => Company,
-    "CASH_FLOW" => AcfReport
+    "GLOBAL_QUOTE" => Quote,
+    "OVERVIEW" => Company,
+    "CASH_FLOW" => AcfReport,
+    "INCOME_STATEMENT" => IncomeStatement
   }.freeze
 
   def perform(flow_id, response, resource)

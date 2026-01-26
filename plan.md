@@ -6,19 +6,20 @@ API
 -[x] Fetch statements endpoint
 -[ ] fix response passing in retries
 -[x] add quote endpoint call into flow
--[ ] extract api call logic to service function?
+-[x] extract api call logic to service function?
 -[x] refactor retry logic for all jobs
 -[x] change create flow and start cf fetch routes
 -[x] fix multiple flows when company not linked
 -[x] change create flow to symbol query param
 -[x] change start quote fetch to its own flow
--[ ] make cf and quote flows parallel - maybe not
 -[ ] fix number precision
 -[x] convert service functions to use single generic function
 -[ ] change acf reports to list rather than hash
 -[x] logo fetch
--[ ] convert all fetch alphavantage jobs to one job!!!
--[ ] move api repsonse conversions to model
+-[x] convert all fetch alphavantage jobs to one job!!!
+-[x] move api repsonse conversions to model
+-[ ] make all endpoints able to create flow
+-[ ] merge start flow controller methods
 
 CLIENT
 -[x] company search
