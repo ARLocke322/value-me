@@ -11,13 +11,16 @@ class IncomeStatement < ApplicationRecord
 
   def self.save_alphavantage_response!(company_id, response)
     response["annualReports"].each do |report|
-      create!(
+      record = find_or_initialize_by(
         company_id: company_id,
-        fiscal_date_ending: report["fiscalDate_ending"],
+        fiscal_date_ending: report["fiscalDateEnding"]
+      )
+
+      record.assign_attributes(
         reported_currency: report["reportedCurrency"],
         gross_profit: report["grossProfit"],
         total_revenue: report["totalRevenue"],
-        cost_of_revenue: report["cost_ofRevenue"],
+        cost_of_revenue: report["costOfRevenue"],
         cost_of_goods_and_services_sold: report["costOfGoodsAndServicesSold"],
         operating_income: report["operatingIncome"],
         selling_general_and_administrative: report["sellingGeneralAndAdministrative"],
@@ -38,8 +41,10 @@ class IncomeStatement < ApplicationRecord
         comprehensive_income_net_of_tax: report["comprehensiveIncomeNetOfTax"],
         ebit: report["ebit"],
         ebitda: report["ebitda"],
-        net_income: report["netIncome"],
+        net_income: report["netIncome"]
       )
+
+      record.save!
     end
   end
 end
