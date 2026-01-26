@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_26_092123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_acf_reports_on_company_id"
     t.index ["fiscal_date_ending", "company_id"], name: "index_acf_reports_on_fiscal_date_ending_and_company_id", unique: true
+  end
+
+  create_table "alphavantage_flows", force: :cascade do |t|
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.string "error_message"
+    t.string "state", default: "pending"
+    t.string "symbol", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_alphavantage_flows_on_company_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -67,6 +77,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_13_175816) do
   end
 
   add_foreign_key "acf_reports", "companies"
+  add_foreign_key "alphavantage_flows", "companies"
   add_foreign_key "company_analysis_flows", "companies"
   add_foreign_key "quotes", "companies"
 end

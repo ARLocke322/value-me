@@ -1,28 +1,26 @@
+
 class SaveAlphavantageJob < ApplicationJob
   queue_as :default
 
-  def perform(flow_id, response)
-    CompanyAnalysisFlow.transaction do
-      flow = CompanyAnalysisFlow.lock.find(flow_id)
+  ALLOWED_MODELS = {
+    "GLOBAL_QUOTE"     => Quote,
+    "OVERVIEW"   => Company,
+    "CASH_FLOW" => AcfReport
+  }.freeze
 
-      response["annualReports"].each do |report|
-        AcfReport.create!(
-          company: flow.company,
-          fiscal_date_ending: report["fiscalDateEnding"],
-          reported_currency: report["reportedCurrency"],
-          operating_cash_flow: report["operatingCashflow"],
-          depreciation_depletion_and_amortization: report["depreciationDepletionAndAmortization"],
-          capital_expenditures: report["capitalExpenditures"],
-          change_in_inventory: report["changeInInventory"],
-        )
-      end
-      flow.finish_alphavantage_save!
+  def perform(flow_id, response, resource)
+    flow = AlphavantageFlow.find(flow_id)
+    model = ALLOWED_MODELS.fetch(resource)
+
+    AlphavantageFlow.transaction do
+      flow.lock!
+      model.save_alphavantage_response!(flow.company_id, response)
+      flow.finish_save!
     end
 
   rescue => e
-    flow = CompanyAnalysisFlow.find(flow_id)
-    flow.update(error_message: e.message)
-    flow.fail_alphavantage_save!
+    flow&.update(error_message: e.message)
+    flow&.fail_save!
     raise e
   end
 end

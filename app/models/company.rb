@@ -1,13 +1,14 @@
 class Company < ApplicationRecord
-  has_one :company_analysis_flow
+  has_one :alphavantage_flow
   has_one :quote
 
   has_many :acf_reports
 
   validates :symbol, presence: true, uniqueness: true
 
-  def save_alphavantage_response!(response)
-    update!(
+  def self.save_alphavantage_response!(company_id, response)
+    record = find_or_initialize_by(id: company_id)
+    record.assign_attributes(
       symbol: response["Symbol"],
       asset_type: response["AssetType"],
       country: response["Country"],
@@ -15,5 +16,6 @@ class Company < ApplicationRecord
       name: response["Name"],
       currency: response["Currency"]
     )
+    record.save!
   end
 end

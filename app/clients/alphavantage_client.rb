@@ -1,5 +1,5 @@
 class AlphavantageClient
-  BASE_URL = "https://www.alphavantage.co/query" \
+  BASE_URL = "https://www.alphavantage.co/query"
 
   def initialize
     @conn = Faraday.new(url: BASE_URL) do |builder|
@@ -26,7 +26,7 @@ class AlphavantageClient
     def valid_response?(resource, data)
       case resource
       when "OVERVIEW" then data.present?
-      when "QUOTE" then data["Global Quote"].present?
+      when "GLOBAL_QUOTE" then data["Global Quote"].present?
       when "CASH_FLOW" then data["annualReports"].is_a?(Array)
       else false
       end
