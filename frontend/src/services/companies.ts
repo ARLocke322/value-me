@@ -1,5 +1,17 @@
-import type { FlowResponse, GetCompanyAcfReportsResponse, GetCompanyQuoteResponse, GetCompanyResponse } from "@/types/api/companies"
-import { FlowResponseSchema, GetCompanyAcfReportsResponseSchema, GetCompanyQuoteResponseSchema, GetCompanyResponseSchema } from "@/types/api/companies"
+import type {
+  FlowResponse,
+  GetCompanyAcfReportsResponse,
+  GetCompanyQuoteResponse,
+  GetCompanyResponse,
+  IncomeStatementsResponse
+} from "@/types/api/companies"
+import {
+  FlowResponseSchema,
+  GetCompanyAcfReportsResponseSchema,
+  GetCompanyQuoteResponseSchema,
+  GetCompanyResponseSchema,
+  IncomeStatementsResponseSchema
+} from "@/types/api/companies"
 import * as z from "zod";
 
 const baseUrl = "http://localhost:3000/api/v1"
@@ -59,6 +71,15 @@ const getCompanyAcfReports = (ticker: string) =>
     ticker, "/cash_flows", "GET", GetCompanyAcfReportsResponseSchema
   )
 
+const fetchIncomeStatements = (ticker: string) =>
+  getData<FlowResponse>(
+    ticker, "/fetch_income_statements", "POST", FlowResponseSchema
+  )
+
+const getIncomeStatements = (ticker: string) =>
+  getData<IncomeStatementsResponse>(
+    ticker, "/income_statements", "GET", IncomeStatementsResponseSchema
+  )
 
 export default {
   fetchCompany,
@@ -67,5 +88,7 @@ export default {
   fetchCompanyQuote,
   getCompanyQuote,
   fetchCompanyAcfReports,
-  getCompanyAcfReports
+  getCompanyAcfReports,
+  fetchIncomeStatements,
+  getIncomeStatements
 }

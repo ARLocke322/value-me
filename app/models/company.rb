@@ -3,6 +3,7 @@ class Company < ApplicationRecord
   has_one :quote
 
   has_many :acf_reports
+  has_many :income_statements
 
   validates :symbol, presence: true, uniqueness: true
 

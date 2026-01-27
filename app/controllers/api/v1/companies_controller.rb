@@ -35,11 +35,12 @@ class Api::V1::CompaniesController < ApplicationController
     }, status: :not_found
   end
 
-  def income_statement
+  def income_statements
     company = Company.includes(:income_statements).find_by!(symbol: params[:symbol])
 
     if company.income_statements.any?
-      render json: company.income_statements, status: :ok
+      render json: company,
+        status: :ok
     else
       render json: {
         message: "No income statement found. Please trigger fetch income statement."
