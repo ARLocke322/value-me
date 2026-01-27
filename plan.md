@@ -20,6 +20,7 @@ API
 -[x] move api repsonse conversions to model
 -[ ] make all endpoints able to create flow
 -[ ] merge start flow controller methods
+-[x] income statement fetch + endpoints
 
 CLIENT
 -[x] company search
@@ -29,3 +30,4 @@ CLIENT
 -[x] merge type assertions
 -[ ] merge hooks into generic?
 -[x] change acf card to pop up
+-[ ] income statement service, hook, and card

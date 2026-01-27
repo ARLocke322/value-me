@@ -59,6 +59,15 @@ const getCompanyAcfReports = (ticker: string) =>
     ticker, "/cash_flows", "GET", GetCompanyAcfReportsResponseSchema
   )
 
+const fetchCompanyIncomeStatements = (ticker: string) =>
+  getData<FlowResponse>(
+    ticker, "/fetch_income_statements", "POST", FlowResponseSchema
+  )
+
+const getCompanyIncomeStatements = (ticker: string) =>
+  getData<GetCompanyAcfReportsResponse>(
+    ticker, "/income_statements", "GET", GetCompanyIncomeStatementsResponseSchema
+  )
 
 export default {
   fetchCompany,

@@ -75,6 +75,20 @@ export const GetCompanyAcfReportsResponseSchema = z.object({
   )
 });
 
+export const GetCompanyAcfReportsResponseSchema = z.object({
+  symbol: z.string(),
+  acf_reports: z.record(
+    z.string(),
+    z.object({
+      operating_cash_flow: z.coerce.number(),
+      depreciation_depletion_and_amortization: z.coerce.number(),
+      capital_expenditures: z.coerce.number(),
+      change_in_inventory: z.coerce.number(),
+      reported_currency: z.string(),
+    }),
+  )
+});
+
 export type FlowResponse = z.infer<typeof FlowResponseSchema>;
 
 export type GetCompanyResponse = z.infer<typeof GetCompanyResponseSchema>;
