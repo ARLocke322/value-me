@@ -75,17 +75,37 @@ export const GetCompanyAcfReportsResponseSchema = z.object({
   )
 });
 
-export const GetCompanyAcfReportsResponseSchema = z.object({
+export const IncomeStatementsResponseSchema = z.object({
   symbol: z.string(),
-  acf_reports: z.record(
-    z.string(),
+  income_statements: z.array(
     z.object({
-      operating_cash_flow: z.coerce.number(),
-      depreciation_depletion_and_amortization: z.coerce.number(),
-      capital_expenditures: z.coerce.number(),
-      change_in_inventory: z.coerce.number(),
+      fiscal_date_ending: z.string(),
       reported_currency: z.string(),
-    }),
+      gross_profit: z.coerce.number(),
+      total_revenue: z.coerce.number(),
+      cost_of_revenue: z.coerce.number(),
+      cost_of_goods_and_services_sold: z.coerce.number(),
+      operating_income: z.coerce.number(),
+      selling_general_and_administrative: z.coerce.number(),
+      research_and_development: z.coerce.number(),
+      operating_expenses: z.coerce.number(),
+      investment_income_net: z.coerce.number(),
+      net_interest_income: z.coerce.number(),
+      interest_income: z.coerce.number(),
+      interest_expense: z.coerce.number(),
+      non_interest_income: z.coerce.number(),
+      other_non_operating_income: z.coerce.number(),
+      depreciation: z.coerce.number(),
+      depreciation_and_amortization: z.coerce.number(),
+      income_before_tax: z.coerce.number(),
+      income_tax_expense: z.coerce.number(),
+      interest_and_debt_expense: z.coerce.number(),
+      net_income_from_continuing_operations: z.coerce.number(),
+      comprehensive_income_net_of_tax: z.coerce.number(),
+      ebit: z.coerce.number(),
+      ebitda: z.coerce.number(),
+      net_income: z.coerce.number(),
+    })
   )
 });
 
@@ -93,10 +113,18 @@ export type FlowResponse = z.infer<typeof FlowResponseSchema>;
 
 export type GetCompanyResponse = z.infer<typeof GetCompanyResponseSchema>;
 
-export type GetCompanyQuoteResponse = z.infer<typeof GetCompanyQuoteResponseSchema>;
+export type GetCompanyQuoteResponse = z.infer<
+  typeof GetCompanyQuoteResponseSchema
+>;
 export type Quote = GetCompanyQuoteResponse['quote'];
 
-export type GetCompanyAcfReportsResponse = z.infer<typeof GetCompanyAcfReportsResponseSchema>;
+export type GetCompanyAcfReportsResponse = z.infer<
+  typeof GetCompanyAcfReportsResponseSchema
+>;
 export type AcfReport = GetCompanyAcfReportsResponse['acf_reports'][string];
 
-
+export type IncomeStatementsResponse = z.infer<
+  typeof IncomeStatementsResponseSchema
+>;
+export type IncomeStatement =
+  IncomeStatementsResponse['income_statements'][number];

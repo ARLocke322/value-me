@@ -39,11 +39,8 @@ class Api::V1::CompaniesController < ApplicationController
     company = Company.includes(:income_statements).find_by!(symbol: params[:symbol])
 
     if company.income_statements.any?
-      render json: {
-        symbol: company.symbol,
-        income_statements: company.income_statements
-          .order(fiscal_date_ending: :desc)
-      }, status: :ok
+      render json: company,
+        status: :ok
     else
       render json: {
         message: "No income statement found. Please trigger fetch income statement."

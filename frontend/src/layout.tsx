@@ -4,7 +4,7 @@ import { useLocation } from 'wouter';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [_location, navigate] = useLocation();
   return (
-    <main className="relative pl-10 w-full flex flex-col items-center justify-center min-h-screen">
+    <main className="min-h-screen bg-background p-4 md:p-8">
       <House
         className="fixed top-4 left-2 cursor-pointer"
         size={24}
