@@ -28,6 +28,7 @@ CLIENT
 -[x] company quote
 -[x] company acf reports
 -[x] merge type assertions
--[ ] merge hooks into generic?
+-[ ] merge hooks into generic? maybe not
 -[x] change acf card to pop up
--[ ] income statement service, hook, and card
+-[x] income statement service, hook, and card
+-[ ] make cash flow statement look nicer

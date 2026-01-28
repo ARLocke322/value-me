@@ -1,9 +1,9 @@
 import useCompanyOverview from "@/hooks/useCompanyOverview"
-import FetchCard from "./FetchCard"
+import FetchCard from "../FetchCard"
 import CompanyOverviewContent from "./CompanyOverviewContent"
 
 
-const CompanyOverviewCard = ({ ticker }: { ticker: string }) => {
+const Overview = ({ ticker }: { ticker: string }) => {
   const { data, loading, error, fetchData } = useCompanyOverview(ticker)
 
   return (
@@ -18,4 +18,4 @@ const CompanyOverviewCard = ({ ticker }: { ticker: string }) => {
     </FetchCard>
   );
 }
-export default CompanyOverviewCard
+export default Overview

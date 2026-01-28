@@ -1,11 +1,10 @@
 
 import { useLocation } from "wouter";
-
-import CompanyOverviewCard from "./CompanyOverviewCard";
-import CompanyQuoteCard from "./CompanyQuoteCard";
-import CompanyAcfReportsCard from "./CompanyAcfReportsCard";
-import CompanyIncomeStatementsCard from "./CompanyIncomeStatementsCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import Overview from "./Overview";
+import Quote from "./Quote";
+import IncomeStatements from "./IncomeStatements";
+import AcfReports from "./AcfReports";
 
 const Company = () => {
   const [location, _navigate] = useLocation();
@@ -21,7 +20,7 @@ const Company = () => {
         </h1>
       </div>
 
-      <Tabs defaultValue="income-statement" className="w-full">
+      <Tabs defaultValue="summary" className="w-full">
         <TabsList className="mb-6">
           <TabsTrigger value="summary">Summary</TabsTrigger>
           <TabsTrigger value="income-statement">Income Statement</TabsTrigger>
@@ -29,16 +28,18 @@ const Company = () => {
         </TabsList>
 
         <TabsContent value="summary">
-          <CompanyOverviewCard ticker={companyTicker} />
-          <CompanyQuoteCard ticker={companyTicker} />
+          <div className="flex flex-col gap-2">
+            <Overview ticker={companyTicker} />
+            <Quote ticker={companyTicker} />
+          </div>
         </TabsContent>
 
         <TabsContent value="income-statement">
-          <CompanyIncomeStatementsCard ticker={companyTicker} />
+          <IncomeStatements ticker={companyTicker} />
         </TabsContent>
 
         <TabsContent value="cash-flow">
-          <CompanyAcfReportsCard ticker={companyTicker} />
+          <AcfReports ticker={companyTicker} />
         </TabsContent>
       </Tabs>
     </div>

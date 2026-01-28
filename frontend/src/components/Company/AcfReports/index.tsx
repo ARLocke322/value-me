@@ -1,8 +1,9 @@
-import FetchCard from "./FetchCard";
+
+import FetchCard from "../FetchCard";
 import AcfTable from "./AcfTable";
 import useCompanyAcfReports from "@/hooks/useCompanyAcfReports";
 
-const CompanyAcfReportsCard = ({ ticker }: { ticker: string }) => {
+const AcfReports = ({ ticker }: { ticker: string }) => {
   const { data, loading, error, fetchData } = useCompanyAcfReports(ticker);
 
   return (
@@ -18,4 +19,4 @@ const CompanyAcfReportsCard = ({ ticker }: { ticker: string }) => {
   );
 };
 
-export default CompanyAcfReportsCard;
+export default AcfReports;

@@ -1,8 +1,9 @@
+
 import useIncomeStatements from "@/hooks/useIncomeStatements";
-import FetchCard from "./FetchCard";
+import FetchCard from "../FetchCard";
 import IncomeStatementTable from "./IncomeStatementTable";
 
-const CompanyIncomeStatementsCard = ({ ticker }: { ticker: string }) => {
+const IncomeStatements = ({ ticker }: { ticker: string }) => {
   const { data, loading, error, fetchData } = useIncomeStatements(ticker);
 
   return (
@@ -18,4 +19,4 @@ const CompanyIncomeStatementsCard = ({ ticker }: { ticker: string }) => {
   );
 };
 
-export default CompanyIncomeStatementsCard;
+export default IncomeStatements;
