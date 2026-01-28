@@ -4,11 +4,11 @@ import companiesService from "@/services/companies"
 import type { AcfReport } from "@/types/api/companies"
 
 const useCompanyAcfReports = (ticker: string) => {
-  const [acfReports, setAcfReports] = useState<Record<number, AcfReport> | null>(null)
+  const [data, setData] = useState<Record<number, AcfReport> | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const fetchAcfReports = () => {
+  const fetchData = () => {
     if (!ticker) return;
 
     setError(null);
@@ -17,7 +17,7 @@ const useCompanyAcfReports = (ticker: string) => {
     companiesService.fetchCompanyAcfReports(ticker)
       .then(() => new Promise(resolve => setTimeout(resolve, 3500)))
       .then(() => companiesService.getCompanyAcfReports(ticker))
-      .then((res) => setAcfReports(res.acf_reports))
+      .then((res) => setData(res.acf_reports))
       .catch(setError)
       .finally(() => setLoading(false))
   }
@@ -29,12 +29,12 @@ const useCompanyAcfReports = (ticker: string) => {
     setLoading(true);
 
     companiesService.getCompanyAcfReports(ticker)
-      .then((res) => setAcfReports(res.acf_reports))
+      .then((res) => setData(res.acf_reports))
       .catch(setError)
       .finally(() => setLoading(false))
   }, [ticker])
 
-  return { acfReports, loading, error, fetchAcfReports }
+  return { data, loading, error, fetchData }
 }
 
 export default useCompanyAcfReports

@@ -19,7 +19,8 @@ const AcfTableRow = ({ date, acfReport }: { date: string, acfReport: AcfReport }
   </TableRow>
 )
 
-const AcfTable = ({ acfReports }: { acfReports: Record<number, AcfReport> }) => {
+const AcfTable = ({ acfReports }: { acfReports: Record<number, AcfReport> | null }) => {
+  if (!acfReports) return null;
   return (
     <Table>
       <TableCaption>

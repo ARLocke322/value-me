@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 import companiesService from "@/services/companies"
 
 const useCompanyQuote = (ticker: string) => {
-  const [quote, setQuote] = useState<Quote | null>(null)
+  const [data, setData] = useState<Quote | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const fetchQuote = () => {
+  const fetchData = () => {
     if (!ticker) return;
 
     setError(null)
@@ -16,7 +16,7 @@ const useCompanyQuote = (ticker: string) => {
     companiesService.fetchCompanyQuote(ticker)
       .then(() => new Promise(resolve => setTimeout(resolve, 300)))
       .then(() => companiesService.getCompanyQuote(ticker))
-      .then((res) => setQuote(res.quote))
+      .then((res) => setData(res.quote))
       .catch(setError)
       .finally(() => setLoading(false))
   }
@@ -28,12 +28,12 @@ const useCompanyQuote = (ticker: string) => {
     setLoading(true);
 
     companiesService.getCompanyQuote(ticker)
-      .then((res) => setQuote(res.quote))
+      .then((res) => setData(res.quote))
       .catch(setError)
       .finally(() => setLoading(false))
   }, [ticker]);
 
-  return { quote, loading, error, fetchQuote }
+  return { data, loading, error, fetchData }
 }
 
 export default useCompanyQuote
