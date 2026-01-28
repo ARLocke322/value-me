@@ -1,7 +1,5 @@
 
 import { useLocation } from "wouter";
-import { Card } from "../ui/card";
-import { useState } from "react";
 
 import CompanyOverviewCard from "./CompanyOverviewCard";
 import CompanyQuoteCard from "./CompanyQuoteCard";
@@ -10,9 +8,9 @@ import CompanyIncomeStatementsCard from "./CompanyIncomeStatementsCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 const Company = () => {
-  const [location, _navigate] = useLocation()
-  const [companyTicker, _setCompanyTicker] = useState<string>(location.slice(1))
-  const imageUrl = `https://img.logo.dev/ticker/${companyTicker}?token=${process.env.LOGO_DEV_PUBLIC_KEY}`
+  const [location, _navigate] = useLocation();
+  const companyTicker = location.slice(1);
+  const imageUrl = `https://img.logo.dev/ticker/${companyTicker}?token=${process.env.LOGO_DEV_PUBLIC_KEY}`;
 
   return (
     <div className="mx-auto max-w-7xl">

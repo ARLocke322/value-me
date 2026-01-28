@@ -37,7 +37,7 @@ const fieldLabels: { key: keyof Omit<IncomeStatement, "fiscal_date_ending" | "re
 ]
 
 function formatCurrency(value: number, currency: string = "USD"): string {
-  if (value === 0 || isNaN(value)) return "—"
+  if (value === 0 || isNaN(value)) return "-"
 
   const absValue = Math.abs(value)
   let formattedValue: string
@@ -66,12 +66,14 @@ function formatYear(dateString: string): string {
 
 const IncomeStatementTable = ({
   incomeStatements,
-}: { incomeStatements: IncomeStatement[] }) => {
+}: { incomeStatements: IncomeStatement[] | null }) => {
   const sortedStatements = incomeStatements
     ? [...incomeStatements].sort(
       (a, b) => new Date(b.fiscal_date_ending).getTime() - new Date(a.fiscal_date_ending).getTime()
     )
     : []
+
+  if (!incomeStatements) return null;
 
   return (
     <Table>

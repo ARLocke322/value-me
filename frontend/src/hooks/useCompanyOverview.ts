@@ -3,11 +3,11 @@ import companiesService from "@/services/companies"
 import type { GetCompanyResponse } from "@/types/api/companies"
 
 const useCompanyOverview = (ticker: string) => {
-  const [overview, setOverview] = useState<GetCompanyResponse | null>(null)
+  const [data, setData] = useState<GetCompanyResponse | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
-  const fetchCompany = () => {
+  const fetchData = () => {
     if (!ticker) return;
 
     setError(null);
@@ -16,7 +16,7 @@ const useCompanyOverview = (ticker: string) => {
     companiesService.fetchCompany(ticker)
       .then(() => new Promise(resolve => setTimeout(resolve, 3500)))
       .then(() => companiesService.getCompany(ticker))
-      .then(setOverview)
+      .then(setData)
       .catch(setError)
       .finally(() => setLoading(false))
   }
@@ -28,12 +28,12 @@ const useCompanyOverview = (ticker: string) => {
     setLoading(true);
 
     companiesService.getCompany(ticker)
-      .then(setOverview)
+      .then(setData)
       .catch(setError)
       .finally(() => setLoading(false))
   }, [ticker])
 
-  return { overview, loading, error, fetchCompany }
+  return { data, loading, error, fetchData }
 }
 
 export default useCompanyOverview
