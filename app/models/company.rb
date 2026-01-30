@@ -4,6 +4,7 @@ class Company < ApplicationRecord
 
   has_many :acf_reports
   has_many :income_statements
+  has_many :balance_sheets
 
   validates :symbol, presence: true, uniqueness: true
 

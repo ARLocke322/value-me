@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_26_152150) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_30_150525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,6 +36,52 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_152150) do
     t.string "symbol", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_alphavantage_flows_on_company_id"
+  end
+
+  create_table "balance_sheets", force: :cascade do |t|
+    t.decimal "accumulated_depreciation_amortization_ppe", precision: 15, scale: 2
+    t.decimal "capital_lease_obligations", precision: 15, scale: 2
+    t.decimal "cash_and_cash_equivalents_at_carrying_value", precision: 15, scale: 2
+    t.decimal "cash_and_short_term_investments", precision: 15, scale: 2
+    t.decimal "common_stock", precision: 15, scale: 2
+    t.bigint "common_stock_shares_outstanding"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.decimal "current_accounts_payable", precision: 15, scale: 2
+    t.decimal "current_debt", precision: 15, scale: 2
+    t.decimal "current_long_term_debt", precision: 15, scale: 2
+    t.decimal "current_net_receivables", precision: 15, scale: 2
+    t.decimal "deferred_revenue", precision: 15, scale: 2
+    t.date "fiscal_date_ending", null: false
+    t.decimal "goodwill", precision: 15, scale: 2
+    t.decimal "intangible_assets", precision: 15, scale: 2
+    t.decimal "intangible_assets_excluding_goodwill", precision: 15, scale: 2
+    t.decimal "inventory", precision: 15, scale: 2
+    t.decimal "investments", precision: 15, scale: 2
+    t.decimal "long_term_debt", precision: 15, scale: 2
+    t.decimal "long_term_debt_noncurrent", precision: 15, scale: 2
+    t.decimal "long_term_investments", precision: 15, scale: 2
+    t.decimal "other_current_assets", precision: 15, scale: 2
+    t.decimal "other_current_liabilities", precision: 15, scale: 2
+    t.decimal "other_non_current_assets", precision: 15, scale: 2
+    t.decimal "other_non_current_liabilities", precision: 15, scale: 2
+    t.decimal "property_plant_equipment", precision: 15, scale: 2
+    t.string "reported_currency", null: false
+    t.decimal "retained_earnings", precision: 15, scale: 2
+    t.decimal "short_long_term_debt_total", precision: 15, scale: 2
+    t.decimal "short_term_debt", precision: 15, scale: 2
+    t.decimal "short_term_investments", precision: 15, scale: 2
+    t.decimal "total_assets", precision: 15, scale: 2
+    t.decimal "total_current_assets", precision: 15, scale: 2
+    t.decimal "total_current_liabilities", precision: 15, scale: 2
+    t.decimal "total_liabilities", precision: 15, scale: 2
+    t.decimal "total_non_current_assets", precision: 15, scale: 2
+    t.decimal "total_non_current_liabilities", precision: 15, scale: 2
+    t.decimal "total_shareholder_equity", precision: 15, scale: 2
+    t.decimal "treasury_stock", precision: 15, scale: 2
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_balance_sheets_on_company_id"
+    t.index ["fiscal_date_ending", "company_id"], name: "index_balance_sheets_on_fiscal_date_ending_and_company_id", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -102,6 +148,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_152150) do
 
   add_foreign_key "acf_reports", "companies"
   add_foreign_key "alphavantage_flows", "companies"
+  add_foreign_key "balance_sheets", "companies"
   add_foreign_key "income_statements", "companies"
   add_foreign_key "quotes", "companies"
 end
