@@ -52,6 +52,23 @@ class Api::V1::CompaniesController < ApplicationController
     }, status: :not_found
   end
 
+  def balance_sheets
+    company = Company.includes(:balance_sheets).find_by!(symbol: params[:symbol])
+
+    if company.balance_sheets.any?
+      render json: company,
+        status: :ok
+    else
+      render json: {
+        message: "No balance sheets found. Please trigger fetch income statement."
+      }, status: :not_found
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: {
+      error: "Company not found"
+    }, status: :not_found
+  end
+
   def quote
     company = Company.find_by!(symbol: params[:symbol])
     quote = company.quote

@@ -29,6 +29,7 @@ class AlphavantageClient
       when "GLOBAL_QUOTE" then data["Global Quote"].present?
       when "CASH_FLOW" then data["annualReports"].is_a?(Array)
       when "INCOME_STATEMENT" then data["annualReports"].is_a?(Array)
+      when "BALANCE_SHEET" then data["annualReports"].is_a?(Array)
       else false
       end
     end

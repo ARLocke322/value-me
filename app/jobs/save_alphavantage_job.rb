@@ -5,7 +5,8 @@ class SaveAlphavantageJob < ApplicationJob
     "GLOBAL_QUOTE" => Quote,
     "OVERVIEW" => Company,
     "CASH_FLOW" => AcfReport,
-    "INCOME_STATEMENT" => IncomeStatement
+    "INCOME_STATEMENT" => IncomeStatement,
+    "BALANCE_SHEET" => BalanceSheet
   }.freeze
 
   def perform(flow_id, response, resource)
