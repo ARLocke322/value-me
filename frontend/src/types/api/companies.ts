@@ -109,6 +109,51 @@ export const IncomeStatementsResponseSchema = z.object({
   )
 });
 
+export const BalanceSheetsResponseSchema = z.object({
+  symbol: z.string(),
+  balance_sheets: z.array(
+    z.object({
+      fiscal_date_ending: z.string(),
+      reported_currency: z.string(),
+      total_assets: z.coerce.number(),
+      total_current_assets: z.coerce.number(),
+      cash_and_cash_equivalents_at_carrying_value: z.coerce.number(),
+      cash_and_short_term_investments: z.coerce.number(),
+      inventory: z.coerce.number(),
+      current_net_receivables: z.coerce.number(),
+      total_non_current_assets: z.coerce.number(),
+      property_plant_equipment: z.coerce.number(),
+      accumulated_depreciation_amortization_ppe: z.coerce.number(),
+      intangible_assets: z.coerce.number(),
+      intangible_assets_excluding_goodwill: z.coerce.number(),
+      goodwill: z.coerce.number(),
+      investments: z.coerce.number(),
+      long_term_investments: z.coerce.number(),
+      short_term_investments: z.coerce.number(),
+      other_current_assets: z.coerce.number(),
+      other_non_current_assets: z.coerce.number(),
+      total_liabilities: z.coerce.number(),
+      total_current_liabilities: z.coerce.number(),
+      current_accounts_payable: z.coerce.number(),
+      deferred_revenue: z.coerce.number(),
+      current_debt: z.coerce.number(),
+      short_term_debt: z.coerce.number(),
+      total_non_current_liabilities: z.coerce.number(),
+      capital_lease_obligations: z.coerce.number(),
+      long_term_debt: z.coerce.number(),
+      current_long_term_debt: z.coerce.number(),
+      long_term_debt_noncurrent: z.coerce.number(),
+      short_long_term_debt_total: z.coerce.number(),
+      other_current_liabilities: z.coerce.number(),
+      other_non_current_liabilities: z.coerce.number(),
+      total_shareholder_equity: z.coerce.number(),
+      treasury_stock: z.coerce.number(),
+      retained_earnings: z.coerce.number(),
+      common_stock: z.coerce.number(),
+      common_stock_shares_outstanding: z.coerce.number()
+    })
+  )
+});
 export type FlowResponse = z.infer<typeof FlowResponseSchema>;
 
 export type GetCompanyResponse = z.infer<typeof GetCompanyResponseSchema>;
@@ -128,3 +173,9 @@ export type IncomeStatementsResponse = z.infer<
 >;
 export type IncomeStatement =
   IncomeStatementsResponse['income_statements'][number];
+
+export type BalanceSheetsResponse = z.infer<
+  typeof BalanceSheetsResponseSchema
+>;
+export type BalanceSheet =
+  BalanceSheetsResponse['balance_sheets'][number];
