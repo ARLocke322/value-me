@@ -6,6 +6,7 @@ import type {
   IncomeStatementsResponse
 } from "@/types/api/companies"
 import {
+  BalanceSheetsResponseSchema,
   FlowResponseSchema,
   GetCompanyAcfReportsResponseSchema,
   GetCompanyQuoteResponseSchema,
@@ -81,6 +82,16 @@ const getIncomeStatements = (ticker: string) =>
     ticker, "/income_statements", "GET", IncomeStatementsResponseSchema
   )
 
+const fetchBalanceSheets = (ticker: string) =>
+  getData<FlowResponse>(
+    ticker, "/fetch_balance_sheets", "POST", FlowResponseSchema
+  )
+
+const getBalanceSheets = (ticker: string) =>
+  getData<GetCompanyAcfReportsResponse>(
+    ticker, "/balance_sheets", "GET", BalanceSheetsResponseSchema
+  )
+
 export default {
   fetchCompany,
   getFlowStatus,
@@ -90,5 +101,7 @@ export default {
   fetchCompanyAcfReports,
   getCompanyAcfReports,
   fetchIncomeStatements,
-  getIncomeStatements
+  getIncomeStatements,
+  fetchBalanceSheets,
+  getBalanceSheets
 }
