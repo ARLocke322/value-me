@@ -5,6 +5,7 @@ import Overview from "./Overview";
 import Quote from "./Quote";
 import IncomeStatements from "./IncomeStatements";
 import AcfReports from "./AcfReports";
+import BalanceSheets from "./BalanceSheets";
 
 const Company = () => {
   const [location, _navigate] = useLocation();
@@ -25,6 +26,7 @@ const Company = () => {
           <TabsTrigger value="summary">Summary</TabsTrigger>
           <TabsTrigger value="income-statement">Income Statement</TabsTrigger>
           <TabsTrigger value="cash-flow">Cash Flow Statement</TabsTrigger>
+          <TabsTrigger value="balance-sheet">Balance Sheet</TabsTrigger>
         </TabsList>
 
         <TabsContent value="summary">
@@ -40,6 +42,10 @@ const Company = () => {
 
         <TabsContent value="cash-flow">
           <AcfReports ticker={companyTicker} />
+        </TabsContent>
+
+        <TabsContent value="balance-sheet">
+          <BalanceSheets ticker={companyTicker} />
         </TabsContent>
       </Tabs>
     </div>

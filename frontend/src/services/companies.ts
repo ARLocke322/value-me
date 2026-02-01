@@ -1,4 +1,6 @@
 import type {
+  BalanceSheet,
+  BalanceSheetsResponse,
   FlowResponse,
   GetCompanyAcfReportsResponse,
   GetCompanyQuoteResponse,
@@ -88,7 +90,7 @@ const fetchBalanceSheets = (ticker: string) =>
   )
 
 const getBalanceSheets = (ticker: string) =>
-  getData<GetCompanyAcfReportsResponse>(
+  getData<BalanceSheetsResponse>(
     ticker, "/balance_sheets", "GET", BalanceSheetsResponseSchema
   )
 
