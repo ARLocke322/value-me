@@ -16,7 +16,10 @@ class Company < ApplicationRecord
       country: response["Country"],
       sector: response["Sector"],
       name: response["Name"],
-      currency: response["Currency"]
+      currency: response["Currency"],
+      beta: response["Beta"],
+      shares_outstanding: response["SharesOutstanding"],
+      market_cap: response["MarketCapitalization"]
     )
     record.save!
   end

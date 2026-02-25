@@ -7,6 +7,9 @@ class CreateCompanies < ActiveRecord::Migration[8.1]
       t.string :currency
       t.string :country
       t.string :sector
+      t.decimal :beta, precision: 5, scale: 3
+      t.bigint :shares_outstanding
+      t.decimal :market_cap, precision: 15, scale: 2
 
       t.timestamps
     end
